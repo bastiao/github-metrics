@@ -7,7 +7,7 @@ from github_metrics.metrics.pr_size import call_pr_size_statistics
 from github_metrics.metrics.time_to_merge import call_mean_time_to_merge_statistics
 from github_metrics.metrics.time_to_open import call_time_to_open_statistics
 from github_metrics.metrics.time_to_review import calulate_prs_review_time_statistics
-
+from github_metrics.metrics.actions import count_actions_metrics
 
 def call_all_metrics(
     pr_list, include_hotfixes, exclude_authors, filter_authors, exclude_weekends
@@ -57,4 +57,10 @@ def call_all_metrics(
     data["hotfixes_count"] = count_hotfixes(
         pr_list=pr_list, exclude_authors=exclude_authors, filter_authors=filter_authors
     )
+    # call for actions
+    data["actions_count"] = count_actions_metrics(
+        pr_list=pr_list
+    )
+
+
     return data

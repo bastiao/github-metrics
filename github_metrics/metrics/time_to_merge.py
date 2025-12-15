@@ -71,6 +71,10 @@ def get_time_to_merge_data(
 
     time_to_merge_list = []
     for pr in merged_prs:
+        if (not pr["commits"]) or len(pr["commits"]) == 0:
+            print(
+                f"PR '{pr['title']}' by author '{pr['author']}' has no commits, skipping...")
+            continue
         first_commit_time = pr["commits"][0]["commited_at"]
         timedelta = pr["merged_at"] - first_commit_time
         if exclude_weekends:
@@ -103,6 +107,7 @@ def call_mean_time_to_merge_statistics(
         filter_authors=filter_authors,
         exclude_weekends=exclude_weekends,
     )
+    #print(data)
     print(
         f"     \033[1mTime to merge\033[0m\n"
         f"     ----------------------------------\n"

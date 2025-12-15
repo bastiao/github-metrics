@@ -57,6 +57,10 @@ def get_time_to_open_data(
 
     time_to_open = []
     for pr in formatted_pr_list:
+        if (not pr["commits"]) or len(pr["commits"]) == 0:
+            print(
+                f"PR '{pr['title']}' by author '{pr['author']}' has no commits, skipping...")
+            continue
         first_commit_time = pr["commits"][0]["commited_at"]
         timedelta = pr["ready_at"] - first_commit_time
         if exclude_weekends:

@@ -20,7 +20,9 @@ def format_request_for_github(cursor=None):
     after = ""
     if cursor:
         after = f', after: "{cursor}"'
-
+    #print(ORG_NAME)
+    #print(REPOSITORY_NAME)
+    #print(after)
     return """{{
     organization(login: "{ORG_NAME}") {{
         repository(name: "{REPOSITORY_NAME}") {{
@@ -103,13 +105,16 @@ def fetch_prs_between(start_date, end_date):
     current_date = None
     cursor = None
     has_next_page = True
+    
 
     while has_next_page and (not current_date or current_date > start_date):
         response = requests.post(
             "https://api.github.com/graphql",
             auth=HTTPBasicAuth(GITHUB_LOGIN, GITHUB_TOKEN),
             json={"query": format_request_for_github(cursor)},
+            timeout=60
         )
+        #print(format_request_for_github(cursor))
 
         if response.json().get("errors", False):
             raise ClientError(response.json().get("errors"))
