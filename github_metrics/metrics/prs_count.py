@@ -11,3 +11,4 @@ def count_prs(pr_list, include_hotfixes, exclude_authors, filter_authors):
         f"     ----------------------------------"
         f"     Total PRs counted: {len(prs_list)}"
     )
+    return data

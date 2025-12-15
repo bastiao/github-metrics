@@ -65,3 +65,4 @@ def call_pr_size_statistics(pr_list, include_hotfixes, exclude_authors, filter_a
         f"     Diff Rate Median: {round(data['rate_median'], 2)}\n"
         f"     Diff Rate 95 percentile: {round(data['rate_percentile_95'], 2)}\n"
     )
+    return data

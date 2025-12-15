@@ -114,6 +114,7 @@ def cli(
     """
     Generates metrics from Github API.
     """
+    print("Starting github-metrics...")
 
     if setup:
         setup_enviroment_variables()
@@ -174,10 +175,24 @@ def cli(
     elif metric == "prs_count":
         count_prs(pr_list, include_hotfixes, exclude_user_list, filter_user_list)
     else:
-        call_all_metrics(
+        data = call_all_metrics(
             pr_list,
             include_hotfixes,
             exclude_user_list,
             filter_user_list,
             exclude_weekends,
         )
+        # Write data to binary file
+        import os 
+        # read env "REPOSITORY_NAME"
+        repository_name = os.getenv("REPOSITORY_NAME", "default_repo_name")
+        print(f"Writing metrics data to binary file: metrics_data{repository_name}.bin")
+        with open("/workspace/metrics_data"+repository_name+".bin", "wb") as file:
+            import pickle
+
+            pickle.dump(data, file)
+            # flush 
+            file.flush()
+            
+        
+        

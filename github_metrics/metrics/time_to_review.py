@@ -139,3 +139,4 @@ def calulate_prs_review_time_statistics(
         f"    95 percentile: {format_timedelta_to_text(data['percentile_95'])}"
         f" ({format_timedelta_to_hours(data['percentile_95'])} hours)\n"
     )
+    return data 

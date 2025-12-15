@@ -69,3 +69,4 @@ def call_merge_rate_statistics(
         f"     ----------------------------------\n"
         f"     Merge Rate: {data['merge_rate']}\n"
     )
+    return data

@@ -17,3 +17,4 @@ def count_hotfixes(pr_list, exclude_authors, filter_authors):
         f"     ----------------------------------\n"
         f"     Total PRs counted: {len(data['hotfix_list'])}\n"
     )
+    return data

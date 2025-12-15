@@ -12,46 +12,49 @@ from github_metrics.metrics.time_to_review import calulate_prs_review_time_stati
 def call_all_metrics(
     pr_list, include_hotfixes, exclude_authors, filter_authors, exclude_weekends
 ):
-    call_mean_time_to_merge_statistics(
+    # data collection
+    data = {}
+    data["mean_time_to_merge"] = call_mean_time_to_merge_statistics(
         pr_list=pr_list,
         include_hotfixes=include_hotfixes,
         exclude_authors=exclude_authors,
         filter_authors=filter_authors,
         exclude_weekends=exclude_weekends,
     )
-    calulate_prs_review_time_statistics(
+    data["review_time"] = calulate_prs_review_time_statistics(
         pr_list=pr_list,
         include_hotfixes=include_hotfixes,
         exclude_authors=exclude_authors,
         filter_authors=filter_authors,
         exclude_weekends=exclude_weekends,
     )
-    call_time_to_open_statistics(
+    data["time_to_open"] = call_time_to_open_statistics(
         pr_list=pr_list,
         include_hotfixes=include_hotfixes,
         exclude_authors=exclude_authors,
         filter_authors=filter_authors,
         exclude_weekends=exclude_weekends,
     )
-    calulate_prs_open_to_merge_time_statistics(
+    data["open_to_merge_time"] = calulate_prs_open_to_merge_time_statistics(
         pr_list=pr_list,
         include_hotfixes=include_hotfixes,
         exclude_authors=exclude_authors,
         filter_authors=filter_authors,
         exclude_weekends=exclude_weekends,
     )
-    call_merge_rate_statistics(
+    data["merge_rate"] = call_merge_rate_statistics(
         pr_list=pr_list,
         include_hotfixes=include_hotfixes,
         exclude_authors=exclude_authors,
         filter_authors=filter_authors,
     )
-    call_pr_size_statistics(
+    data["pr_size"] = call_pr_size_statistics(
         pr_list=pr_list,
         include_hotfixes=include_hotfixes,
         exclude_authors=exclude_authors,
         filter_authors=filter_authors,
     )
-    count_hotfixes(
+    data["hotfixes_count"] = count_hotfixes(
         pr_list=pr_list, exclude_authors=exclude_authors, filter_authors=filter_authors
     )
+    return data

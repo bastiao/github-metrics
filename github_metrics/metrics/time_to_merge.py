@@ -103,7 +103,6 @@ def call_mean_time_to_merge_statistics(
         filter_authors=filter_authors,
         exclude_weekends=exclude_weekends,
     )
-
     print(
         f"     \033[1mTime to merge\033[0m\n"
         f"     ----------------------------------\n"
@@ -116,3 +115,4 @@ def call_mean_time_to_merge_statistics(
         f"     95 percentile: {format_timedelta_to_text(data['percentile_95'])}"
         f" ({format_timedelta_to_hours(data['percentile_95'])} hours)\n"
     )
+    return data
